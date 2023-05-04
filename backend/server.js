@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import workoutRoutes from './routes/workouts.js'
 
 
 // express app
@@ -15,9 +16,7 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.get('/', (req, res) => {
-    res.json({mssg : 'Welcome to the app'});
-});
+app.use('/api/workouts', workoutRoutes);
 
 
 // listen for requests
