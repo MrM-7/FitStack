@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import workoutRoutes from './routes/workouts.js'
 
 
 // express app
@@ -9,15 +10,14 @@ const app = express();
 dotenv.config();
 
 // Middleware
+app.use(express.json());
 app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
 });
 
 // routes
-app.get('/', (req, res) => {
-    res.json({mssg : 'Welcome to the app'});
-});
+app.use('/api/workouts', workoutRoutes);
 
 
 // listen for requests
