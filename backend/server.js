@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import workoutRoutes from './routes/workouts.js'
+import mongoose from 'mongoose';
 
 
 // express app
@@ -19,10 +20,14 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/workouts', workoutRoutes);
 
+// connect to db
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        // listen for requests
+        const PORT = process.env.PORT;
 
-// listen for requests
-const PORT = process.env.PORT;
-
-app.listen(PORT, () => {
-    console.log(`Node server is running on port no ${PORT}`);
-});
+        app.listen(PORT, () => {
+            console.log(`Node server is running on port no ${PORT}`);
+        });
+    })
+    .catch(err => console.log(err));
