@@ -10,4 +10,4 @@ const WorkoutDetails = ({ workout }) => {
     )
   }
   
-  export default WorkoutDetails;
+export default WorkoutDetails;
